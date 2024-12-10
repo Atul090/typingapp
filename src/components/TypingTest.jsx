@@ -1,9 +1,9 @@
 import React from "react";
-
+import './style.css'
 const TypingTest = () => {
     const paragraph="Hi my name is adwfelorem l lorem  tul and you are in my typing simulation";
     return (
-        <div>
+        <div className="container">
             <div className="test">
                 {   
                     paragraph.split("").map((char,index)=>(
@@ -18,7 +18,7 @@ const TypingTest = () => {
                 <p>Mistakes:</p>
                 <p>WPM:</p>
                 <p>CPM:</p>
-                <button>Try Again</button>
+                <button className="btn">Try Again</button>
 
             </div>
         </div>
