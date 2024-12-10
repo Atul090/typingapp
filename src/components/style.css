@@ -51,3 +51,10 @@ button.btn{
 button.btn.hover{
     background-color: #02500b;
 }
+
+input.input-field{
+    opacity: 0;
+    z-index: -999;
+    /* z-index: -999; to hide */
+    position: absolute;
+}
