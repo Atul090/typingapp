@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './style.css'
 
-const paragraph="Hi my name is adwfelorem l lorem  tul and you are in my typing simulation";
+const paragraph="Mastery is not built in moments of comfort but in the quiet hours of relentless effort and unwavering discipline. Every mistake is a lesson, a piece of the puzzle that sharpens your craft. The key to growth lies in embracing discomfort, for it is there that true resilience is forged. Focus your energy, press forward with precision, and let every challenge be a stepping stone toward excellence. Remember, success is not a destination but the cumulative result of small, deliberate actions taken daily. The journey to greatness begins with the decision to never settle for mediocrity";
 
 const TypingTest = () => {
 
@@ -12,8 +12,9 @@ const TypingTest = () => {
     const [CPM,setCPM]=useState(0);
     const [charIndex,setCharIndex]=useState(0);
     const [isTyping,setIsTyping]=useState(false);
-    const inputRef=useRef([]);
-    const charRefs=useRef(null)
+    const inputRef=useRef(null);
+    const charRefs=useRef([]);
+    const [correctWrong,setCorrectWrong]=useState([]);
 
     useEffect(()=>{
         inputRef.current.focus()
@@ -21,7 +22,7 @@ const TypingTest = () => {
 
     const handleChange = (e) =>{
         const characters = charRefs.current;
-        const currentChar = charRefs.current[charIndex];
+        let currentChar = charRefs.current[charIndex];
         let typedChar = e.target.value.slice(-1);
         if(charIndex<characters.length && timeLeft>0){
             if(!isTyping){
@@ -29,9 +30,11 @@ const TypingTest = () => {
             }
             if(typedChar === currentChar.textContent){
                 setCharIndex(charIndex+1);
+                correctWrong[charIndex]=" correct "
             } else {
                 setCharIndex(charIndex+1);
                 setMistakes(mistakes+1);
+                correctWrong[charIndex]=" wrong "
             }
             if(charIndex===characters.length-1) setIsTyping(false);
         } else {
@@ -45,7 +48,8 @@ const TypingTest = () => {
                 <input type="text" className="input-field" ref={inputRef} onChange={handleChange}/>
                 {   
                     paragraph.split("").map((char,index)=>(
-                        <span className="char" ref={(e)=>charRefs.current[index]=e}>
+                        //adding active class
+                        <span className={`char ${index === charIndex ? "active": "" } ${correctWrong[index]}`} ref={(e)=>charRefs.current[index]=e}>
                             {char}
                         </span>
                     ))

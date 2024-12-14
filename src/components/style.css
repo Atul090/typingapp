@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Noto Sans Mono', monospace;
-    background-color: #e7e9e9;
+    background-color: #3a3b3b;
 }
 .container{
     max-width: 650px;
@@ -57,4 +57,17 @@ input.input-field{
     z-index: -999;
     /* z-index: -999; to hide */
     position: absolute;
+}
+
+span.active{
+    border-bottom: 3px solid blue;
+}
+
+span.correct{
+    background-color: rgb(104, 224, 104);
+
+}
+span.wrong{
+    color: red;
+    background-color: pink;
 }
