@@ -20,6 +20,42 @@ const TypingTest = () => {
         inputRef.current.focus()
     },[])
 
+    useEffect(()=>{
+        let interval;
+        if(isTyping && timeLeft>0){
+            interval=setInterval(()=>{
+                setTimeLeft(timeLeft-1);
+                let correctChars=charIndex-mistakes;
+                let totalTime=maxTime-timeLeft;
+
+                let cpm=correctChars*(60/totalTime);
+                cpm=cpm<0 || !cpm || cpm === Infinity ? 0 : cpm;
+                setCPM(parseInt(cpm,10));
+
+                let wpm = Math.round((correctChars / 5) / (totalTime / 60));
+                wpm= wpm < 0 || !wpm || wpm === Infinity ? 0:wpm;
+                setWPM(wpm)
+            },1000);
+        } else if (timeLeft===0) {
+            clearInterval(interval);
+            setIsTyping(false);
+        }
+        return () => {
+            clearInterval(interval);
+        }
+    },[isTyping,timeLeft])
+
+    const resetGame = ()=>{
+        setIsTyping(false);
+        setCPM(0);
+        setTimeLeft(maxTime);
+        setWPM(0);
+        setMistakes(0);
+        setCharIndex(0);
+        setCorrectWrong(Array(charRefs.current.length).fill(''))
+        inputRef.current.focus();
+    }
+
     const handleChange = (e) =>{
         const characters = charRefs.current;
         let currentChar = charRefs.current[charIndex];
@@ -60,7 +96,7 @@ const TypingTest = () => {
                 <p>Mistakes: <strong>{mistakes}</strong> </p>
                 <p>WPM: <strong>{WPM}</strong> </p>
                 <p>CPM: <strong>{CPM}</strong> </p>
-                <button className="btn">Try Again</button>
+                <button className="btn" onClick={resetGame}>Try Again</button>
 
             </div>
         </div>
