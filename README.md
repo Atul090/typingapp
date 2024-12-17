@@ -12,3 +12,7 @@ Currently, two official plugins are available:
 Strat the project with :
 npm install
 npm run dev
+
+
+About ::
+React project for learning hooks and states
