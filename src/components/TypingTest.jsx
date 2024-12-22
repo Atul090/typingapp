@@ -80,12 +80,15 @@ const TypingTest = () => {
 
     return (
         <div className="container">
+            <header>
+                <h1>Typing Test</h1>
+            </header>
             <div className="test">
                 <input type="text" className="input-field" ref={inputRef} onChange={handleChange}/>
                 {   
                     paragraph.split("").map((char,index)=>(
                         //adding active class
-                        <span className={`char ${index === charIndex ? "active": "" } ${correctWrong[index]}`} ref={(e)=>charRefs.current[index]=e}>
+                        <span key={index} className={`char ${index === charIndex ? "active": "" } ${correctWrong[index]}`} ref={(e)=>charRefs.current[index]=e}>
                             {char}
                         </span>
                     ))
@@ -97,8 +100,10 @@ const TypingTest = () => {
                 <p>WPM: <strong>{WPM}</strong> </p>
                 <p>CPM: <strong>{CPM}</strong> </p>
                 <button className="btn" onClick={resetGame}>Try Again</button>
-
             </div>
+            <footer>
+                <p>Improve your typing skills with this test!</p>
+            </footer>
         </div>
     )
 }
