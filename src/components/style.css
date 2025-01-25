@@ -1,73 +1,196 @@
-*{
+* {
     padding: 0;
     margin: 0;
-}
-.App{
     box-sizing: border-box;
+}
+
+.App {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Noto Sans Mono', monospace;
-    background-color: #3a3b3b;
-}
-.container{
-    max-width: 650px;
-    margin:  5px;
-    width: calc(100% - 10px);   
-    padding: 30px;
-    box-sizing: border-box;
-    border: 1px solid #ced4da;
-    background: #fff;
-    box-shadow: 0 0 6px rgba(0,0,0,0.25);
-}
-.test{
-    user-select: none;
-}
-span{
-    font-size: 20px;
-    user-select: none;
-    cursor: text;
-}
-.result{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 2px solid rgb(106,106,104);
-}
-button.btn{
-    padding: 5px;
-    outline: none;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    cursor: pointer;
-    background: #049c13;
-    color: #fff;
-    font-size: 15px;
-    transition: all 0.5s;
-}
-button.btn.hover{
-    background-color: #02500b;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 20px;
 }
 
-input.input-field{
+.container {
+    max-width: 850px;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: #1a1a2e;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #495057;
+    font-size: 1.1rem;
+}
+
+.test {
+    user-select: none;
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-display {
+    line-height: 1.8;
+    min-height: 120px;
+    max-height: 120px;
+    overflow-y: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 10px;
+    position: relative;
+}
+
+.text-display::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, #f8f9fa);
+    pointer-events: none;
+}
+
+span.char {
+    font-size: 1.25rem;
+    font-family: 'Fira Code', monospace;
+    user-select: none;
+    position: relative;
+    padding: 0 1px;
+    transition: all 0.1s ease;
+    display: inline-block;
+    margin: 0 1px;
+}
+
+/* Space character styling */
+span.char:empty::before {
+    content: '␣';
+    color: #adb5bd;
+    opacity: 0.5;
+}
+
+span.active {
+    background-color: rgba(67, 97, 238, 0.1);
+    border-radius: 4px;
+}
+
+span.correct {
+    color: #087f5b;
+}
+
+span.wrong {
+    color: #e03131;
+    background-color: rgba(224, 49, 49, 0.1);
+    border-radius: 2px;
+}
+
+.result {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #e9ecef;
+}
+
+.final-result {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.final-result h2 {
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+}
+
+.result p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.result p strong {
+    font-size: 1.5rem;
+    color: #1a1a2e;
+}
+
+button.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #4361ee;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    margin: 1rem auto;
+    display: block;
+}
+
+button.btn:hover {
+    background: #3046c9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+input.input-field {
     opacity: 0;
     z-index: -999;
-    /* z-index: -999; to hide */
     position: absolute;
 }
 
-span.active{
-    border-bottom: 3px solid blue;
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: #868e96;
+    font-size: 0.9rem;
 }
 
-span.correct{
-    background-color: rgb(104, 224, 104);
-
-}
-span.wrong{
-    color: red;
-    background-color: pink;
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .test {
+        padding: 1.5rem;
+    }
+    
+    span.char {
+        font-size: 1.1rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
 }
