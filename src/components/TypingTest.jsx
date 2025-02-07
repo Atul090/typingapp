@@ -169,7 +169,7 @@ const TypingTest = () => {
             <button className="btn" onClick={resetGame}>
                 {isFinished ? 'Try Again' : 'Reset'}
             </button>
-
+            add the right timer andf the backsace fucntionality
             <footer>
                 <p>Practice regularly to improve your typing speed and accuracy!</p>
             </footer>
